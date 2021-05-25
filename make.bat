@@ -12,6 +12,7 @@ set startFile="start.bat"
 IF "%~1" == "" goto help
 
 if %1==help goto help
+if %1==clean goto clean
 if %1==build goto build
 if %1==run goto run
 if %1==full goto full
@@ -19,11 +20,27 @@ if %1==open goto open
 
 :help
 echo help:
+echo make clean ^> Cleans temporary build files and the jar file and folder
 echo make build ^> Builds and moves the jar into the plugin folder
 echo make run   ^> Starts the server
 echo make full  ^> Executes make build and make run
 echo make open  ^> Opens the plugin folder
 goto done
+
+:clean
+echo Cleaning...
+call gradlew clean >> nul
+
+if exist %pluginFolder%\CFDiscord.jar (
+    del %pluginFolder%\CFDiscord.jar
+)
+
+if exist %pluginFolder%\CFDiscord\ (
+    rmdir /Q /S %pluginFolder%\CFDiscord
+)
+
+echo Done!
+goto :done
 
 :build
 echo Building jar
