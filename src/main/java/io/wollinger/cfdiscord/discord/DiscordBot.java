@@ -1,11 +1,12 @@
-package io.wollinger.cfdiscord;
+package io.wollinger.cfdiscord.discord;
 
+import io.wollinger.cfdiscord.LogManager;
+import io.wollinger.cfdiscord.mc.CFDiscord;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.JDABuilder;
 import net.dv8tion.jda.api.entities.Activity;
 import net.dv8tion.jda.api.requests.GatewayIntent;
 import net.dv8tion.jda.api.utils.cache.CacheFlag;
-import org.bukkit.Bukkit;
 import org.bukkit.configuration.file.FileConfiguration;
 
 import javax.security.auth.login.LoginException;

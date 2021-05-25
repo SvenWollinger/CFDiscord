@@ -1,5 +1,6 @@
-package io.wollinger.cfdiscord;
+package io.wollinger.cfdiscord.mc;
 
+import io.wollinger.cfdiscord.discord.DiscordBot;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
 
