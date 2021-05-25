@@ -5,8 +5,8 @@ cls
 REM This make file is not required to build. If you just want the jar just use gradle
 REM I use this for easier setup with my test server
 
-set serverFolder="G:\Programming\Minecraft\Server1"
-set pluginFolder=%serverFolder%"\plugins"
+set serverFolder=G:\Programming\Minecraft\Server1
+set pluginFolder=%serverFolder%\plugins
 set startFile="start.bat"
 
 IF "%~1" == "" goto help
@@ -42,5 +42,14 @@ goto :EOF
 call :build
 call :run
 goto :done
+
+:open
+echo %pluginFolder%
+if exist %pluginFolder%\ (
+    %SystemRoot%\explorer.exe %pluginFolder%
+) else (
+    echo Folder not found
+)
+goto done
 
 :done
