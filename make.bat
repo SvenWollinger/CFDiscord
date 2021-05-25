@@ -5,6 +5,12 @@ cls
 REM This make file is not required to build. If you just want the jar just use gradle
 REM I use this for easier setup with my test server
 
+REM I Recommend this as your start.bat in this case
+
+REM cd %~dp0
+REM java -jar paper.jar -nogui
+REM exit
+
 set serverFolder=G:\Programming\Minecraft\Server1
 set pluginFolder=%serverFolder%\plugins
 set startFile="start.bat"
