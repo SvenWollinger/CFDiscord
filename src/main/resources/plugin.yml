@@ -3,3 +3,7 @@ version: 0.1
 author: Sven Wollinger
 main: io.wollinger.cfdiscord.mc.CFDiscord
 api-version: 1.16
+commands:
+  discordconnect:
+    description: Connect your minecraft profile to your discord profile
+    usage: /<command>
