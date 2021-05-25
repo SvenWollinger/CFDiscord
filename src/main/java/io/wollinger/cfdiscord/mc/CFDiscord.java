@@ -13,6 +13,8 @@ public class CFDiscord extends JavaPlugin {
 
     private HashMap<String, String> connectionList = new HashMap<String, String>();
 
+    public static String TOKEN_IDENTIFIER = "CF_MC_ID";
+
     @Override
     public void onEnable(){
         saveDefaultConfig();
@@ -43,4 +45,7 @@ public class CFDiscord extends JavaPlugin {
         return null;
     }
 
+    public void removePlayerFromConnectionList(String uuid) {
+        connectionList.remove(uuid);
+    }
 }

@@ -1,10 +1,7 @@
 package io.wollinger.cfdiscord.mc;
 
 import io.wollinger.cfdiscord.mc.commands.ICommand;
-import org.bukkit.command.Command;
-import org.bukkit.command.CommandExecutor;
-import org.bukkit.command.CommandSender;
-import org.bukkit.command.TabCompleter;
+import org.bukkit.command.*;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -27,6 +24,10 @@ public class CommandManager implements CommandExecutor, TabCompleter {
 
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
+        if(sender instanceof ConsoleCommandSender && commands.get(command.getName()).isPlayerOnly()) {
+            //TODO: Add proper text
+            return true;
+        }
         if(commands.containsKey(command.getName()))
             commands.get(command.getName()).run(sender, command, label, args);
         return true;

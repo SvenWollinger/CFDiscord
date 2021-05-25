@@ -9,6 +9,7 @@ import net.md_5.bungee.api.chat.TextComponent;
 import net.md_5.bungee.api.chat.hover.content.Text;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
+import org.bukkit.entity.Player;
 
 import java.util.List;
 
@@ -21,16 +22,27 @@ public class CMDDiscordConnect implements ICommand {
 
     @Override
     public void run(CommandSender sender, Command cmd, String labels, String[] args) {
-        String token = Utils.generateToken(50, true, true);
+        Player player = (Player) sender;
+        String uuid = player.getUniqueId().toString();
 
-        TextComponent line1 = new TextComponent("A random long token has been generated! Click the \"Copy me\" text below to copy it into your clipboard!\n");
-        TextComponent line2 = new TextComponent("<Copy token>");
-        line2.setClickEvent(new ClickEvent(ClickEvent.Action.COPY_TO_CLIPBOARD, token));
-        line2.setBold(true);
-        TextComponent line3 = new TextComponent("\nNow message the bot of the server using the connect command like this:\n");
-        TextComponent line4 = new TextComponent("!mcconnect <token here>");
+        String token = cfDiscord.TOKEN_IDENTIFIER + "=" + Utils.generateToken(70, true, true);
+        cfDiscord.addPlayerToConnectionList(uuid, token);
 
-        sender.spigot().sendMessage(line1, line2, line3, line4);
+        TextComponent tcToken = new TextComponent("<Copy token>");
+        tcToken.setClickEvent(new ClickEvent(ClickEvent.Action.COPY_TO_CLIPBOARD, token));
+        tcToken.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new Text(token.substring(0, 25) + "...")));
+        tcToken.setBold(true);
+        sender.spigot().sendMessage(new TextComponent("Here is your token:\n"), tcToken, new TextComponent("\nSimply dm the bot that token, it will know what to do! :)\n(This token is only usable for a minute or till you use the command again!)"));
+
+        new java.util.Timer().schedule(
+                new java.util.TimerTask() {
+                    @Override
+                    public void run() {
+                        cfDiscord.removePlayerFromConnectionList(uuid);
+                    }
+                },
+                60000
+        );
     }
 
     @Override
