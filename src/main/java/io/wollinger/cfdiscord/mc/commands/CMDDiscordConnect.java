@@ -2,7 +2,6 @@ package io.wollinger.cfdiscord.mc.commands;
 
 import io.wollinger.cfdiscord.Utils;
 import io.wollinger.cfdiscord.mc.CFDiscord;
-import net.md_5.bungee.api.chat.BaseComponent;
 import net.md_5.bungee.api.chat.ClickEvent;
 import net.md_5.bungee.api.chat.HoverEvent;
 import net.md_5.bungee.api.chat.TextComponent;
@@ -25,7 +24,7 @@ public class CMDDiscordConnect implements ICommand {
         Player player = (Player) sender;
         String uuid = player.getUniqueId().toString();
 
-        String token = cfDiscord.TOKEN_IDENTIFIER + "=" + Utils.generateToken(70, true, true);
+        String token = CFDiscord.TOKEN_IDENTIFIER + "=" + Utils.generateToken(70, true, true);
         cfDiscord.addPlayerToConnectionList(uuid, token);
 
         TextComponent tcToken = new TextComponent("<Copy token>");

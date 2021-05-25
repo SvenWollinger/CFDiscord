@@ -9,16 +9,15 @@ import java.util.HashMap;
 
 public class CFDiscord extends JavaPlugin {
     private DiscordBot bot;
-    private CommandManager commandManager;
 
-    private HashMap<String, String> connectionList = new HashMap<String, String>();
+    private final HashMap<String, String> connectionList = new HashMap<>();
 
     public static String TOKEN_IDENTIFIER = "CF_MC_ID";
 
     @Override
     public void onEnable(){
         saveDefaultConfig();
-        commandManager = new CommandManager(this);
+        CommandManager commandManager = new CommandManager(this);
         commandManager.addCommand(new CMDDiscordConnect(this));
 
         bot = new DiscordBot();
