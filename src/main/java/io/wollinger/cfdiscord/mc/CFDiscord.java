@@ -5,9 +5,13 @@ import io.wollinger.cfdiscord.mc.commands.CMDDiscordConnect;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
 
+import java.util.HashMap;
+
 public class CFDiscord extends JavaPlugin {
     private DiscordBot bot;
     private CommandManager commandManager;
+
+    private HashMap<String, String> connectionList = new HashMap<String, String>();
 
     @Override
     public void onEnable(){
@@ -26,6 +30,17 @@ public class CFDiscord extends JavaPlugin {
 
     public void stop() {
         Bukkit.getPluginManager().disablePlugin(this);
+    }
+
+    public void addPlayerToConnectionList(String uuid, String token) {
+        connectionList.put(uuid, token);
+    }
+
+    public String getPlayerFromConnectionList(String uuid) {
+        if(connectionList.containsKey(uuid)) {
+            return connectionList.get(uuid);
+        }
+        return null;
     }
 
 }
