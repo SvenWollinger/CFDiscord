@@ -16,13 +16,12 @@ public class DiscordBot {
     private JDA jda;
     private CFDiscord cfDiscord;
 
-    public void DiscordBot() {
-
+    public DiscordBot(CFDiscord cfDiscord) {
+        this.cfDiscord = cfDiscord;
     }
 
-    public void start(CFDiscord cfDiscord) {
+    public void start() {
         LogManager.log("Setting up discord bot", Level.INFO);
-        this.cfDiscord = cfDiscord;
 
         FileConfiguration config = cfDiscord.getConfig();
         String token = config.getString("token");
@@ -33,12 +32,13 @@ public class DiscordBot {
             return;
         }
 
-        JDABuilder builder = JDABuilder.create(token, GatewayIntent.GUILD_MESSAGES, GatewayIntent.GUILD_MEMBERS, GatewayIntent.GUILD_MESSAGE_REACTIONS, GatewayIntent.GUILD_PRESENCES);
-        builder.disableCache(CacheFlag.MEMBER_OVERRIDES, CacheFlag.VOICE_STATE);
+        JDABuilder builder = JDABuilder.createDefault(token);
+       // builder.disableCache(CacheFlag.MEMBER_OVERRIDES, CacheFlag.VOICE_STATE);
         builder.setBulkDeleteSplittingEnabled(false);
         String playing = config.getString("playing");
         LogManager.log("Settings status to \"playing " + playing + "\"", Level.INFO);
         builder.setActivity(Activity.playing(playing));
+
 
         LogManager.log("Starting discord bot", Level.INFO);
         try {
@@ -51,6 +51,8 @@ public class DiscordBot {
             return;
         }
         LogManager.log("Discord bot started", Level.INFO);
+        new DiscordCommandManager(this);
+
     }
 
     public void shutdown() {
@@ -60,6 +62,10 @@ public class DiscordBot {
 
     public JDA getJDA() {
         return jda;
+    }
+
+    public CFDiscord getCFDiscord() {
+        return cfDiscord;
     }
 
 }

@@ -1,6 +1,7 @@
 package io.wollinger.cfdiscord.mc;
 
 import io.wollinger.cfdiscord.discord.DiscordBot;
+import io.wollinger.cfdiscord.discord.DiscordCommandManager;
 import io.wollinger.cfdiscord.mc.commands.CMDDiscordConnect;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -20,8 +21,9 @@ public class CFDiscord extends JavaPlugin {
         CommandManager commandManager = new CommandManager(this);
         commandManager.addCommand(new CMDDiscordConnect(this));
 
-        bot = new DiscordBot();
-        bot.start(this);
+        bot = new DiscordBot(this);
+        bot.start();
+
     }
 
     @Override
@@ -37,9 +39,19 @@ public class CFDiscord extends JavaPlugin {
         connectionList.put(uuid, token);
     }
 
-    public String getPlayerFromConnectionList(String uuid) {
+    public String getPlayerFromConnectionListByUUID(String uuid) {
         if(connectionList.containsKey(uuid)) {
             return connectionList.get(uuid);
+        }
+        return null;
+    }
+
+    public String getPlayerFromConnectionListByToken(String token) {
+        if(connectionList.containsValue(token)) {
+            for (String key : connectionList.keySet()) {
+                if(connectionList.get(key).equals(token))
+                    return key;
+            }
         }
         return null;
     }
