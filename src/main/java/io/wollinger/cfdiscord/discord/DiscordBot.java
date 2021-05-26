@@ -5,8 +5,6 @@ import io.wollinger.cfdiscord.mc.CFDiscord;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.JDABuilder;
 import net.dv8tion.jda.api.entities.Activity;
-import net.dv8tion.jda.api.requests.GatewayIntent;
-import net.dv8tion.jda.api.utils.cache.CacheFlag;
 import org.bukkit.configuration.file.FileConfiguration;
 
 import javax.security.auth.login.LoginException;
@@ -14,7 +12,7 @@ import java.util.logging.Level;
 
 public class DiscordBot {
     private JDA jda;
-    private CFDiscord cfDiscord;
+    private final CFDiscord cfDiscord;
 
     public DiscordBot(CFDiscord cfDiscord) {
         this.cfDiscord = cfDiscord;
@@ -33,7 +31,6 @@ public class DiscordBot {
         }
 
         JDABuilder builder = JDABuilder.createDefault(token);
-       // builder.disableCache(CacheFlag.MEMBER_OVERRIDES, CacheFlag.VOICE_STATE);
         builder.setBulkDeleteSplittingEnabled(false);
         String playing = config.getString("playing");
         LogManager.log("Settings status to \"playing " + playing + "\"", Level.INFO);

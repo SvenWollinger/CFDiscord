@@ -1,7 +1,6 @@
 package io.wollinger.cfdiscord.mc;
 
 import io.wollinger.cfdiscord.discord.DiscordBot;
-import io.wollinger.cfdiscord.discord.DiscordCommandManager;
 import io.wollinger.cfdiscord.mc.commands.CMDDiscordConnect;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;

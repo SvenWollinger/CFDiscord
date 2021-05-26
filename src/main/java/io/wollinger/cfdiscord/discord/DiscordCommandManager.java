@@ -2,7 +2,6 @@ package io.wollinger.cfdiscord.discord;
 
 import io.wollinger.cfdiscord.Utils;
 import io.wollinger.cfdiscord.mc.CFDiscord;
-import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.entities.ChannelType;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
@@ -10,12 +9,10 @@ import org.bukkit.entity.Player;
 
 public class DiscordCommandManager extends ListenerAdapter {
     private final DiscordBot discordBot;
-    private final JDA jda;
 
     public DiscordCommandManager(DiscordBot discordBot) {
         this.discordBot = discordBot;
-        jda = discordBot.getJDA();
-        jda.addEventListener(this);
+        discordBot.getJDA().addEventListener(this);
     }
 
     @Override
