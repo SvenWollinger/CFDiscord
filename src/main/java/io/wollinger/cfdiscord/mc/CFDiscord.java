@@ -1,7 +1,7 @@
 package io.wollinger.cfdiscord.mc;
 
 import io.wollinger.cfdiscord.discord.DiscordBot;
-import io.wollinger.cfdiscord.mc.commands.CMDDiscordConnect;
+import io.wollinger.cfdiscord.mc.commands.MCCMDDiscordConnect;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -17,8 +17,8 @@ public class CFDiscord extends JavaPlugin {
     @Override
     public void onEnable(){
         saveDefaultConfig();
-        CommandManager commandManager = new CommandManager(this);
-        commandManager.addCommand(new CMDDiscordConnect(this));
+        MCCommandManager commandManager = new MCCommandManager(this);
+        commandManager.addCommand(new MCCMDDiscordConnect(this));
 
         bot = new DiscordBot(this);
         bot.start();

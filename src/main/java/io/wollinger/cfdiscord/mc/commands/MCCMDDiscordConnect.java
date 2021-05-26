@@ -12,10 +12,10 @@ import org.bukkit.entity.Player;
 
 import java.util.List;
 
-public class CMDDiscordConnect implements ICommand {
+public class MCCMDDiscordConnect implements IMCCommand {
     private final CFDiscord cfDiscord;
 
-    public CMDDiscordConnect(CFDiscord cfDiscord) {
+    public MCCMDDiscordConnect(CFDiscord cfDiscord) {
         this.cfDiscord = cfDiscord;
     }
 
