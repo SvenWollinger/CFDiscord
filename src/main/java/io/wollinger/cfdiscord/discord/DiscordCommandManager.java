@@ -20,10 +20,10 @@ public class DiscordCommandManager extends ListenerAdapter {
 
     @Override
     public void onMessageReceived(MessageReceivedEvent event) {
+        CFDiscord cfDiscord = discordBot.getCFDiscord();
         if(event.getChannelType() == ChannelType.PRIVATE) {
             String message = event.getMessage().getContentRaw();
             if(message.startsWith(CFDiscord.TOKEN_IDENTIFIER)) {
-                CFDiscord cfDiscord = discordBot.getCFDiscord();
                 String uuid = cfDiscord.getPlayerFromConnectionListByToken(message);
                 if(uuid != null) {
                     cfDiscord.removePlayerFromConnectionList(uuid);
@@ -35,6 +35,14 @@ public class DiscordCommandManager extends ListenerAdapter {
                 } else {
                     event.getChannel().sendMessage("Token invalid.").complete();
                 }
+            }
+        } else {
+            String message = event.getMessage().getContentRaw();
+            if(message.startsWith(CFDiscord.TOKEN_IDENTIFIER)) {
+                String uuid = cfDiscord.getPlayerFromConnectionListByToken(message);
+                if(uuid != null)
+                    cfDiscord.removePlayerFromConnectionList(uuid);
+                event.getMessage().reply("This token is now invalid! Please **ONLY** send them via direct message to me!").complete();
             }
         }
     }
