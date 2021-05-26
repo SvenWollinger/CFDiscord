@@ -1,5 +1,6 @@
 package io.wollinger.cfdiscord.discord;
 
+import io.wollinger.cfdiscord.UserInfo;
 import io.wollinger.cfdiscord.Utils;
 import io.wollinger.cfdiscord.mc.CFDiscord;
 import net.dv8tion.jda.api.entities.ChannelType;
@@ -24,6 +25,9 @@ public class DiscordCommandManager extends ListenerAdapter {
                 String uuid = cfDiscord.getPlayerFromConnectionListByToken(message);
                 if(uuid != null) {
                     cfDiscord.removePlayerFromConnectionList(uuid);
+                    UserInfo userInfo = new UserInfo(Utils.stringToUUID(uuid), event.getAuthor().getId());
+                    cfDiscord.getUserStorage().addUser(userInfo);
+
                     Player player = cfDiscord.getServer().getPlayer(Utils.stringToUUID(uuid));
                     if(player != null) {
                         player.sendMessage("Verified discord account <" + event.getAuthor().getAsTag() + ">");

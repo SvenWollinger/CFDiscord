@@ -7,3 +7,6 @@ commands:
   discordconnect:
     description: Connect your minecraft profile to your discord profile
     usage: /<command>
+  discordstatus:
+    description: Check your profile status
+    usage: /<command>
